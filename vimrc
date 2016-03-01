@@ -29,8 +29,11 @@ Plugin 'tpope/vim-commentary'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'vim-scripts/bufexplorer.zip'
+Plugin 'ternjs/tern_for_vim'
 
-Bundle 'w0ng/vim-hybrid'
+" Use custom vim-hybrid fork
+Plugin 'freshl/vim-hybrid'
+Plugin 'chriskempson/base16-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -51,11 +54,14 @@ filetype plugin indent on    " required
 
 let mapleader=","
 
-set background=dark
+" colorscheme hybrid
 colorscheme hybrid
+set background=dark
+let base16colorspace=256
+set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors"
 set number
 set rnu
-set guifont=DejaVu\ Sans\ Mono\ For\ Powerline:h13
+set guifont=Hack:h13
 
 " INDENTION WIDTH SPACES AND STUFF
 set expandtab
@@ -66,14 +72,33 @@ set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
 
+set showmatch
+set encoding=utf8
+
 " Multiple Select Fix
 set selection=inclusive
 let g:multi_cursor_next_key="\<C-s>"
 
 " AIRLINE STUFF
 let g:airline#extensions#tabline#enabled = 1
-set laststatus=2
-" let g:bufferline_echo = 1
+let g:airline_powerline_fonts = 1
+if isdirectory(expand("~/.vim/bundle/vim-airline-themes/"))
+    if !exists('g:airline_theme')
+        let g:airline_theme = 'base16'
+    endif
+    if !exists('g:airline_powerline_fonts')
+        " Use the default set of separators with a few customizations
+        let g:airline_left_sep='›'  " Slightly fancier than '>'
+        let g:airline_right_sep='‹' " Slightly fancier than '<'
+    endif
+endif
+let g:airline_right_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_left_alt_sep= ''
+let g:airline_left_sep = ''
+
+" don't hide quotes in json files
+let g:vim_json_syntax_conceal = 0
 
 " NERDTREE / NERDTREE TABS
 let g:nerdtree_tabs_open_on_gui_startup = 0
