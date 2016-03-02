@@ -8,7 +8,7 @@ else # OS X `ls`
     colorflag="-G"
 fi
 
-alias vim="mvim"
+alias vim="mvim -v"
 
 # Filesystem aliases
 alias ..='cd ..'

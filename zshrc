@@ -30,7 +30,7 @@ compinit
 
 for config ($ZSH/**/*completion.sh) source $config
 
-export EDITOR='mvim'
+export EDITOR='mvim -v'
 
 export PATH=/usr/local/bin:$PATH
 
@@ -75,7 +75,7 @@ fi
 
 # Base16 Shell
 # if [ -z "$THEME" ]; then
-    export THEME="base16-chalk"
+    export THEME="base16-3024"
 # fi
 if [ -z "$BACKGROUND" ]; then
     export BACKGROUND="dark"

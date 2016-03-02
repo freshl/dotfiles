@@ -24,6 +24,7 @@ Plugin 'msanders/snipmate.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'pangloss/vim-javascript'
+Plugin 'jelera/vim-javascript-syntax'
 Plugin 'vim-scripts/YankRing.vim'
 Plugin 'tpope/vim-commentary'
 Plugin 'Valloric/YouCompleteMe'
@@ -38,6 +39,7 @@ Plugin 'chriskempson/base16-vim'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+syntax on
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 "
@@ -57,7 +59,8 @@ let mapleader=","
 " colorscheme hybrid
 colorscheme hybrid
 set background=dark
-let base16colorspace=256
+set encoding=utf8
+let base16colorspace=256  " Access colors present in 256 colorspace"
 set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors"
 set number
 set rnu
@@ -84,13 +87,13 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 if isdirectory(expand("~/.vim/bundle/vim-airline-themes/"))
     if !exists('g:airline_theme')
-        let g:airline_theme = 'base16'
+        let g:airline_theme = 'powerlineish'
     endif
-    if !exists('g:airline_powerline_fonts')
-        " Use the default set of separators with a few customizations
-        let g:airline_left_sep='›'  " Slightly fancier than '>'
-        let g:airline_right_sep='‹' " Slightly fancier than '<'
-    endif
+    " if !exists('g:airline_powerline_fonts')
+    "     " Use the default set of separators with a few customizations
+    "     let g:airline_left_sep='›'  " Slightly fancier than '>'
+    "     let g:airline_right_sep='‹' " Slightly fancier than '<'
+    " endif
 endif
 let g:airline_right_alt_sep = ''
 let g:airline_right_sep = ''
@@ -126,6 +129,11 @@ nnoremap <C-w>    <Esc>:tabclose<CR>
 
 vnoremap <silent> * :call VisualSelection('f', '')<CR>
 vnoremap <silent> # :call VisualSelection('b', '')<CR>
+
+nmap <silent> <leader>lw :wincmd h<CR>
+nmap <silent> <leader>rw :wincmd l<CR>
+nmap <silent> <leader>bw :wincmd j<CR>
+nmap <silent> <leader>tw :wincmd k<CR>
 
 let g:ctrlp_map = '<leader>p'
 let g:ctrlp_cmd = 'CtrlP'
