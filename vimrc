@@ -148,6 +148,9 @@ let g:multi_cursor_next_key='<leader>mc'
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 
+" NEOVIM PYTHON FIX
+let g:ycm_path_to_python_interpreter = '/usr/bin/python2.7'
+
 " REMOVE SCROLLBARS
 set guioptions-=r
 set guioptions-=R

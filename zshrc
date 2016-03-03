@@ -1,6 +1,8 @@
 export DOTFILES=$HOME/dotfiles
 export ZSH=$DOTFILES/zsh
 
+export PATH="/usr/local/bin:$PATH"
+
 # display how long all tasks over 10 seconds take
 export REPORTTIME=10
 
@@ -30,7 +32,7 @@ compinit
 
 for config ($ZSH/**/*completion.sh) source $config
 
-export EDITOR='mvim -v'
+export EDITOR='nvim'
 
 export PATH=/usr/local/bin:$PATH
 
