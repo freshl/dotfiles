@@ -11,7 +11,6 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'tpope/vim-fugitive'
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
@@ -19,11 +18,12 @@ Plugin 'mattn/emmet-vim'
 Plugin 'michaeljsmith/vim-indent-object'
 Plugin 'tpope/vim-surround'
 Plugin 'terryma/vim-multiple-cursors'
-Plugin 'scrooloose/syntastic'
+Plugin 'benekastah/neomake'
 Plugin 'msanders/snipmate.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'pangloss/vim-javascript'
+Plugin 'jakar/vim-json'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'vim-scripts/YankRing.vim'
 Plugin 'tpope/vim-commentary'
@@ -31,9 +31,10 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'vim-scripts/bufexplorer.zip'
 Plugin 'ternjs/tern_for_vim'
+Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'sickill/vim-pasta'
 
-" Use custom vim-hybrid fork
-Plugin 'freshl/vim-hybrid'
+" colorschemes
 Plugin 'chriskempson/base16-vim'
 
 " All of your Plugins must be added before the following line
@@ -56,12 +57,12 @@ syntax on
 
 let mapleader=","
 
-" colorscheme hybrid
-colorscheme hybrid
-set background=dark
 set encoding=utf8
 let base16colorspace=256  " Access colors present in 256 colorspace"
 set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors"
+execute "set background=".$BACKGROUND
+execute "colorscheme ".$THEME
+
 set number
 set rnu
 set guifont=Hack:h13
@@ -84,10 +85,11 @@ let g:multi_cursor_next_key="\<C-s>"
 
 " AIRLINE STUFF
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#tab_nr_type = 1
 let g:airline_powerline_fonts = 1
 if isdirectory(expand("~/.vim/bundle/vim-airline-themes/"))
     if !exists('g:airline_theme')
-        let g:airline_theme = 'powerlineish'
+        let g:airline_theme = 'tomorrow'
     endif
     " if !exists('g:airline_powerline_fonts')
     "     " Use the default set of separators with a few customizations
@@ -107,7 +109,7 @@ let g:vim_json_syntax_conceal = 0
 let g:nerdtree_tabs_open_on_gui_startup = 0
 let g:NERDTreeWinPos = "right"
 let NERDTreeShowHidden=0
-let NERDTreeIgnore = ['\.pyc$', '__pycache__']
+let NERDTreeIgnore = ['\.pyc$', '__pycache__', 'node_modules']
 let g:NERDTreeWinSize=35
 
 " SEARCH STUFF
@@ -135,6 +137,12 @@ nmap <silent> <leader>rw :wincmd l<CR>
 nmap <silent> <leader>bw :wincmd j<CR>
 nmap <silent> <leader>tw :wincmd k<CR>
 
+" save file with ctrl-s
+inoremap <C-s> <esc>:w<CR>
+nmap <C-s> :w<CR>
+
+nmap <silent> <leader>yr :YRShow<CR>
+
 let g:ctrlp_map = '<leader>p'
 let g:ctrlp_cmd = 'CtrlP'
 
@@ -147,6 +155,7 @@ let g:multi_cursor_next_key='<leader>mc'
 " CTRLP CUSTOM IGNORES
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+let g:ctrlp_show_hidden = 1
 
 " NEOVIM PYTHON FIX
 let g:ycm_path_to_python_interpreter = '/usr/bin/python2.7'
@@ -166,6 +175,10 @@ let g:bufExplorerFindActive=1
 let g:bufExplorerSortBy='name'
 map <leader>o :BufExplorer<cr>
 
+" NEOMAKE AUTO
+autocmd! BufWritePost,BufEnter * Neomake
+let g:neomake_open_list = 2
+
 " CUSTOM FUNCTIONS HELPER
 function! HasPaste()
     if &paste
@@ -182,3 +195,4 @@ endif
 func! CurrentFileDir(cmd)
     return a:cmd . " " . expand("%:p:h") . "/"
 endfunc
+
