@@ -1,11 +1,11 @@
 #!/bin/bash
 
-tm_icon="♟"
-tm_color_background=colour234
-tm_color_active=colour118
+tm_icon="👾"
+tm_color_background=colour233
+tm_color_active=colour098
 tm_color_inactive=colour241
-tm_color_feature=colour4
-tm_color_music=colour203
+tm_color_feature=colour239
+tm_color_music=colour001
 
 # separators
 tm_left_separator=''

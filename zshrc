@@ -66,6 +66,9 @@ if hash hub 2>/dev/null; then
     eval "$(hub alias -s)"
 fi
 
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+. $(brew --prefix)/etc/bash_completion
+fi
 # source nvm
 # export NVM_DIR=~/.nvm
 
@@ -76,9 +79,9 @@ fi
 
 
 # Base16 Shell
-# if [ -z "$THEME" ]; then
-    export THEME="base16-3024"
-# fi
+if [ -z "$THEME" ]; then
+    export THEME="base16-default"
+fi
 if [ -z "$BACKGROUND" ]; then
     export BACKGROUND="dark"
 fi
@@ -86,4 +89,3 @@ fi
 BASE16_SHELL="$DOTFILES/.config/base16-shell/$THEME.$BACKGROUND.sh"
 # [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 source $BASE16_SHELL
-

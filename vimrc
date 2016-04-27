@@ -35,7 +35,8 @@ Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'sickill/vim-pasta'
 
 " colorschemes
-Plugin 'chriskempson/base16-vim'
+" Plugin 'chriskempson/base16-vim'
+Plugin 'marciomazza/vim-brogrammer-theme'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -60,8 +61,10 @@ let mapleader=","
 set encoding=utf8
 let base16colorspace=256  " Access colors present in 256 colorspace"
 set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors"
-execute "set background=".$BACKGROUND
-execute "colorscheme ".$THEME
+execute "set background=dark"
+".$BACKGROUND
+execute "colorscheme brogrammer"
+".$THEME
 
 set number
 set rnu
