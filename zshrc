@@ -25,6 +25,7 @@ if [[ -a ~/.localrc ]]; then
     source ~/.localrc
 fi
 
+export PATH="/Library/Frameworks/Python.framework/Versions/3.2/bin:${PATH}"
 
 # initialize autocomplete
 autoload -U compinit

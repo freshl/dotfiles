@@ -22,9 +22,10 @@ Plugin 'benekastah/neomake'
 Plugin 'msanders/snipmate.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'pangloss/vim-javascript'
 Plugin 'jakar/vim-json'
-Plugin 'jelera/vim-javascript-syntax'
+Plugin 'othree/yajs.vim'
+Plugin 'mxw/vim-jsx'
+Plugin 'pangloss/vim-javascript'
 Plugin 'vim-scripts/YankRing.vim'
 Plugin 'tpope/vim-commentary'
 Plugin 'Valloric/YouCompleteMe'
@@ -33,10 +34,11 @@ Plugin 'vim-scripts/bufexplorer.zip'
 Plugin 'ternjs/tern_for_vim'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'sickill/vim-pasta'
+Plugin 'Shougo/deoplete.nvim'
 
 " colorschemes
 " Plugin 'chriskempson/base16-vim'
-Plugin 'marciomazza/vim-brogrammer-theme'
+Plugin 'joshdick/onedark.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -56,6 +58,12 @@ syntax on
 
 " CUSTOM STUFF
 
+" jsx for js files
+let g:jsx_ext_required = 0
+
+" neocomplete on start
+let g:deoplete#enable_at_startup = 1
+
 let mapleader=","
 
 set encoding=utf8
@@ -63,7 +71,7 @@ let base16colorspace=256  " Access colors present in 256 colorspace"
 set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors"
 execute "set background=dark"
 ".$BACKGROUND
-execute "colorscheme brogrammer"
+execute "colorscheme onedark"
 ".$THEME
 
 set number
@@ -92,7 +100,7 @@ let g:airline#extensions#tabline#tab_nr_type = 1
 let g:airline_powerline_fonts = 1
 if isdirectory(expand("~/.vim/bundle/vim-airline-themes/"))
     if !exists('g:airline_theme')
-        let g:airline_theme = 'tomorrow'
+        let g:airline_theme = 'laederon'
     endif
     " if !exists('g:airline_powerline_fonts')
     "     " Use the default set of separators with a few customizations
@@ -139,6 +147,10 @@ nmap <silent> <leader>lw :wincmd h<CR>
 nmap <silent> <leader>rw :wincmd l<CR>
 nmap <silent> <leader>bw :wincmd j<CR>
 nmap <silent> <leader>tw :wincmd k<CR>
+
+" Find todo and fixme stuff + copen
+" ST ShowTodo
+nmap <silent> <leader>st :grep -r --exclude-dir=node_modules TODO .<CR>:copen<CR>
 
 " save file with ctrl-s
 inoremap <C-s> <esc>:w<CR>

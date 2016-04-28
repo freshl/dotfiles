@@ -10,6 +10,8 @@ fi
 
 alias vim="nvim"
 
+alias python=python3
+
 # Filesystem aliases
 alias ..='cd ..'
 alias ...='cd ../..'
