@@ -28,13 +28,14 @@ Plugin 'mxw/vim-jsx'
 Plugin 'pangloss/vim-javascript'
 Plugin 'vim-scripts/YankRing.vim'
 Plugin 'tpope/vim-commentary'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'vim-scripts/bufexplorer.zip'
 Plugin 'ternjs/tern_for_vim'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'sickill/vim-pasta'
 Plugin 'Shougo/deoplete.nvim'
+Plugin 'Shougo/neosnippet.vim'
+Plugin 'Shougo/neosnippet-snippets'
 
 " colorschemes
 " Plugin 'chriskempson/base16-vim'
@@ -63,6 +64,21 @@ let g:jsx_ext_required = 0
 
 " neocomplete on start
 let g:deoplete#enable_at_startup = 1
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+" deoplete tab-complete
+inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : deoplete#mappings#manual_complete()
+" ,<Tab> for regular tab
+inoremap <Leader><Tab> <Space><Space>
+" tern
+autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
 
 let mapleader=","
 
