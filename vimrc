@@ -12,8 +12,10 @@ Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'tpope/vim-fugitive'
 
+Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plugin 'junegunn/fzf.vim'
 Plugin 'scrooloose/nerdtree'
-Plugin 'kien/ctrlp.vim'
+Plugin 'jceb/vim-orgmode'
 Plugin 'mattn/emmet-vim'
 Plugin 'michaeljsmith/vim-indent-object'
 Plugin 'tpope/vim-surround'
@@ -36,10 +38,12 @@ Plugin 'sickill/vim-pasta'
 Plugin 'Shougo/deoplete.nvim'
 Plugin 'Shougo/neosnippet.vim'
 Plugin 'Shougo/neosnippet-snippets'
+Plugin 'gregsexton/MatchTag'
 
 " colorschemes
-" Plugin 'chriskempson/base16-vim'
-Plugin 'joshdick/onedark.vim'
+Plugin 'mhartington/oceanic-next'
+
+" Markdown settings
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -58,6 +62,9 @@ syntax on
 " Put your non-Plugin stuff after this line
 
 " CUSTOM STUFF
+
+" Exit Terminal with ESC
+:tnoremap <Esc> <C-\><C-n>
 
 " jsx for js files
 let g:jsx_ext_required = 0
@@ -82,14 +89,20 @@ endif
 
 let mapleader=","
 
-set encoding=utf8
-let base16colorspace=256  " Access colors present in 256 colorspace"
-set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors"
-execute "set background=dark"
-".$BACKGROUND
-execute "colorscheme onedark"
-".$THEME
+ " For Neovim 0.1.3 and 0.1.4
+ let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
+ " Or if you have Neovim >= 0.1.5
+ if (has("termguicolors"))
+   set termguicolors
+ endif
+
+ " Theme
+ syntax enable
+ colorscheme OceanicNext
+ set background=dark
+
+set encoding=utf8
 set number
 set rnu
 set guifont=Hack:h13
@@ -124,10 +137,11 @@ if isdirectory(expand("~/.vim/bundle/vim-airline-themes/"))
     "     let g:airline_right_sep='‹' " Slightly fancier than '<'
     " endif
 endif
-let g:airline_right_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_left_alt_sep= ''
-let g:airline_left_sep = ''
+
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = '<'
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = '>'
 
 " don't hide quotes in json files
 let g:vim_json_syntax_conceal = 0
@@ -174,9 +188,6 @@ nmap <C-s> :w<CR>
 
 nmap <silent> <leader>yr :YRShow<CR>
 
-let g:ctrlp_map = '<leader>p'
-let g:ctrlp_cmd = 'CtrlP'
-
 map <leader>nt :NERDTreeToggle<CR>
 map <leader>c   :close<CR>
 
@@ -184,9 +195,24 @@ map <leader>c   :close<CR>
 let g:multi_cursor_next_key='<leader>mc'
 
 " CTRLP CUSTOM IGNORES
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
-let g:ctrlp_show_hidden = 1
+" let g:ctrlp_working_path_mode = 0
+" let g:ctrlp_custom_ignore = '\v[\/]\.(DS_Storegit|hg|svn|optimized|compiled|node_modules)$'
+" let g:ctrlp_show_hidden = 1
+
+" FZF
+let g:fzf_layout = { 'down': '~25%' }
+nmap <silent> <leader>p :FZF<cr>
+
+let $FZF_DEFAULT_COMMAND= 'ag -g ""'
+
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
+
+set wildignore+=**/node_modules   " ignores node_modules
+set wildignore+=**/spec/reports   " ignores spec/reports
+set wildignore+=**/tmp/cache      " ignores tmp/cache
 
 " NEOVIM PYTHON FIX
 let g:ycm_path_to_python_interpreter = '/usr/bin/python2.7'

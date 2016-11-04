@@ -2,6 +2,8 @@ export DOTFILES=$HOME/dotfiles
 export ZSH=$DOTFILES/zsh
 
 export PATH="/usr/local/bin:$PATH"
+export ANDROID_HOME=~/Library/Android/sdk
+export PATH=${PATH}:${ANDROID_HOME}/tools
 
 # display how long all tasks over 10 seconds take
 export REPORTTIME=10
