@@ -12,8 +12,8 @@ Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'tpope/vim-fugitive'
 
-Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plugin 'junegunn/fzf.vim'
+" Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" Plugin 'junegunn/fzf.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jceb/vim-orgmode'
 Plugin 'mattn/emmet-vim'
@@ -25,23 +25,33 @@ Plugin 'msanders/snipmate.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'jakar/vim-json'
-Plugin 'othree/yajs.vim'
+" Plugin 'othree/yajs.vim'
 Plugin 'mxw/vim-jsx'
 Plugin 'pangloss/vim-javascript'
-Plugin 'vim-scripts/YankRing.vim'
+" Plugin 'vim-scripts/YankRing.vim'
 Plugin 'tpope/vim-commentary'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'vim-scripts/bufexplorer.zip'
-Plugin 'ternjs/tern_for_vim'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'sickill/vim-pasta'
+Plugin 'jiangmiao/auto-pairs'
 Plugin 'Shougo/deoplete.nvim'
+" Plugin 'Valloric/YouCompleteMe'
 Plugin 'Shougo/neosnippet.vim'
 Plugin 'Shougo/neosnippet-snippets'
 Plugin 'gregsexton/MatchTag'
+Plugin 'kien/ctrlp.vim'
+Plugin 'isRuslan/vim-es6'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'flowtype/vim-flow'
+Plugin 'ryanoasis/vim-devicons'
+Plugin 'tomtom/quickfixsigns_vim'
 
 " colorschemes
-Plugin 'mhartington/oceanic-next'
+" Plugin 'mhartington/oceanic-next'
+" Plugin 'joshdick/onedark.vim'
+" Plugin 'w0ng/vim-hybrid'
+Plugin 'colepeters/spacemacs-theme.vim'
 
 " Markdown settings
 
@@ -63,6 +73,12 @@ syntax on
 
 " CUSTOM STUFF
 
+" DEV ICONS
+
+" FLOW stuff
+" let g:neomake_javascript_enabled_makers = ['flow']
+" let g:neomake_jsx_enabled_makers = ['flow']
+
 " Exit Terminal with ESC
 :tnoremap <Esc> <C-\><C-n>
 
@@ -80,7 +96,7 @@ inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : deoplete#mappings#manual
 " ,<Tab> for regular tab
 inoremap <Leader><Tab> <Space><Space>
 " tern
-autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
+" autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
 
 " For conceal markers.
 if has('conceal')
@@ -99,13 +115,15 @@ let mapleader=","
 
  " Theme
  syntax enable
- colorscheme OceanicNext
+ colorscheme spacemacs-theme
+ let g:onedark_termcolors=256
  set background=dark
 
+" FONT STUFF
 set encoding=utf8
 set number
 set rnu
-set guifont=Hack:h13
+set guifont=Knack\ Nerd\ Font:h11
 
 " INDENTION WIDTH SPACES AND STUFF
 set expandtab
@@ -129,7 +147,7 @@ let g:airline#extensions#tabline#tab_nr_type = 1
 let g:airline_powerline_fonts = 1
 if isdirectory(expand("~/.vim/bundle/vim-airline-themes/"))
     if !exists('g:airline_theme')
-        let g:airline_theme = 'laederon'
+        let g:airline_theme = 'onedark'
     endif
     " if !exists('g:airline_powerline_fonts')
     "     " Use the default set of separators with a few customizations
@@ -195,15 +213,18 @@ map <leader>c   :close<CR>
 let g:multi_cursor_next_key='<leader>mc'
 
 " CTRLP CUSTOM IGNORES
-" let g:ctrlp_working_path_mode = 0
-" let g:ctrlp_custom_ignore = '\v[\/]\.(DS_Storegit|hg|svn|optimized|compiled|node_modules)$'
-" let g:ctrlp_show_hidden = 1
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_custom_ignore = '\v[\/]\.(DS_Storegit|hg|svn|optimized|compiled|node_modules)$'
+let g:ctrlp_show_hidden = 1
+
+let g:ctrlp_map = '<leader>p'
+let g:ctrlp_cmd = 'CtrlP'
 
 " FZF
-let g:fzf_layout = { 'down': '~25%' }
-nmap <silent> <leader>p :FZF<cr>
+" let g:fzf_layout = { 'down': '~25%' }
+" nmap <silent> <leader>p :FZF<cr>
 
-let $FZF_DEFAULT_COMMAND= 'ag -g ""'
+" let $FZF_DEFAULT_COMMAND= 'ag -g ""'
 
 imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
@@ -232,17 +253,20 @@ let g:bufExplorerFindActive=1
 let g:bufExplorerSortBy='name'
 map <leader>o :BufExplorer<cr>
 
-" NEOMAKE AUTO
-autocmd! BufWritePost,BufEnter * Neomake
-let g:neomake_open_list = 2
+" NEOMAKE
+" On save
+" autocmd BufWritePost,BufEnter * Neomake
+" on buffer update insert
+" autocmd InsertChange,TextChanged * update | Neomake
+" let g:neomake_open_list = 2
 
 " CUSTOM FUNCTIONS HELPER
-function! HasPaste()
-    if &paste
-        return 'PASTE MODE  '
-    endif
-    return ''
-endfunction
+" function! HasPaste()
+"     if &paste
+"         return 'PASTE MODE  '
+"     endif
+"     return ''
+" endfunction
 
 if has("autocmd")
    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
