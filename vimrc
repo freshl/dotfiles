@@ -15,11 +15,9 @@ Plugin 'tpope/vim-fugitive'
 " Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 " Plugin 'junegunn/fzf.vim'
 Plugin 'scrooloose/nerdtree'
-Plugin 'jceb/vim-orgmode'
 Plugin 'mattn/emmet-vim'
 Plugin 'michaeljsmith/vim-indent-object'
 Plugin 'tpope/vim-surround'
-Plugin 'terryma/vim-multiple-cursors'
 Plugin 'benekastah/neomake'
 Plugin 'msanders/snipmate.vim'
 Plugin 'vim-airline/vim-airline'
@@ -34,7 +32,7 @@ Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'vim-scripts/bufexplorer.zip'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'sickill/vim-pasta'
-Plugin 'jiangmiao/auto-pairs'
+" Plugin 'jiangmiao/auto-pairs'
 Plugin 'Shougo/deoplete.nvim'
 " Plugin 'Valloric/YouCompleteMe'
 Plugin 'Shougo/neosnippet.vim'
@@ -43,15 +41,17 @@ Plugin 'gregsexton/MatchTag'
 Plugin 'kien/ctrlp.vim'
 Plugin 'isRuslan/vim-es6'
 Plugin 'leafgarland/typescript-vim'
-Plugin 'flowtype/vim-flow'
-Plugin 'ryanoasis/vim-devicons'
+" Plugin 'flowtype/vim-flow'
+" Plugin 'ryanoasis/vim-devicons'
 Plugin 'tomtom/quickfixsigns_vim'
+Plugin 'terryma/vim-smooth-scroll'
 
 " colorschemes
 " Plugin 'mhartington/oceanic-next'
 " Plugin 'joshdick/onedark.vim'
 " Plugin 'w0ng/vim-hybrid'
-Plugin 'colepeters/spacemacs-theme.vim'
+" Plugin 'colepeters/spacemacs-theme.vim'
+Plugin 'rakr/vim-one'
 
 " Markdown settings
 
@@ -91,12 +91,22 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
+
 " deoplete tab-complete
-inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : deoplete#mappings#manual_complete()
+" inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+let g:user_emmet_expandabbr_key='<Tab>'
+imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+
 " ,<Tab> for regular tab
 inoremap <Leader><Tab> <Space><Space>
 " tern
 " autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
+
+" SMMOTH SCROLL
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
+noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
+noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
 
 " For conceal markers.
 if has('conceal')
@@ -115,7 +125,7 @@ let mapleader=","
 
  " Theme
  syntax enable
- colorscheme spacemacs-theme
+ colorscheme one
  let g:onedark_termcolors=256
  set background=dark
 
@@ -123,7 +133,8 @@ let mapleader=","
 set encoding=utf8
 set number
 set rnu
-set guifont=Knack\ Nerd\ Font:h11
+" set guifont=Knack\ Nerd\ Font:h11
+set guifont=Fira\ Mono\ Font:h11
 
 " INDENTION WIDTH SPACES AND STUFF
 set expandtab
@@ -147,13 +158,13 @@ let g:airline#extensions#tabline#tab_nr_type = 1
 let g:airline_powerline_fonts = 1
 if isdirectory(expand("~/.vim/bundle/vim-airline-themes/"))
     if !exists('g:airline_theme')
-        let g:airline_theme = 'onedark'
+        let g:airline_theme = 'one'
     endif
-    " if !exists('g:airline_powerline_fonts')
-    "     " Use the default set of separators with a few customizations
-    "     let g:airline_left_sep='›'  " Slightly fancier than '>'
-    "     let g:airline_right_sep='‹' " Slightly fancier than '<'
-    " endif
+    if !exists('g:airline_powerline_fonts')
+        " Use the default set of separators with a few customizations
+        let g:airline_left_sep='›'  " Slightly fancier than '>'
+        let g:airline_right_sep='‹' " Slightly fancier than '<'
+    endif
 endif
 
 let g:airline_left_sep = ''
@@ -206,8 +217,10 @@ nmap <C-s> :w<CR>
 
 nmap <silent> <leader>yr :YRShow<CR>
 
-map <leader>nt :NERDTreeToggle<CR>
+map <leader>nt :NERDTreeFind<CR>
 map <leader>c   :close<CR>
+
+map <leader>fc :NERDTreeFind<CR>
 
 " Multicursor
 let g:multi_cursor_next_key='<leader>mc'
@@ -253,12 +266,27 @@ let g:bufExplorerFindActive=1
 let g:bufExplorerSortBy='name'
 map <leader>o :BufExplorer<cr>
 
+
+" MOVING LINES LAZY
+" Normal mode
+nnoremap <C-j> :m .+1<CR>==
+nnoremap <C-k> :m .-2<CR>==
+
+" Insert mode
+" inoremap <C-j> <ESC>:m .+1<CR>==gi
+" inoremap <C-k> <ESC>:m .-2<CR>==gi
+
+" Visual mode
+vnoremap <C-j> :m '>+1<CR>gv=gv
+vnoremap <C-k> :m '<-2<CR>gv=gv
+
 " NEOMAKE
-" On save
-" autocmd BufWritePost,BufEnter * Neomake
-" on buffer update insert
-" autocmd InsertChange,TextChanged * update | Neomake
-" let g:neomake_open_list = 2
+let g:neomake_open_list=1
+let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_logfile = '/usr/local/var/log/neomake.log'
+autocmd! BufWritePost * Neomake
+
+let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 
 " CUSTOM FUNCTIONS HELPER
 " function! HasPaste()

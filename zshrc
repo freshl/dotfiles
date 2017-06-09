@@ -2,8 +2,8 @@ export DOTFILES=$HOME/dotfiles
 export ZSH=$DOTFILES/zsh
 
 export PATH="/usr/local/bin:$PATH"
-export ANDROID_HOME=~/Library/Android/sdk
-export PATH=${PATH}:${ANDROID_HOME}/tools
+# export ANDROID_HOME=~/Library/Android/sdk
+# export PATH=${PATH}:${ANDROID_HOME}/tools
 
 # display how long all tasks over 10 seconds take
 export REPORTTIME=10
@@ -83,14 +83,24 @@ fi
 
 # Base16 Shell
 if [ -z "$THEME" ]; then
-    export THEME="base16-default"
+    export THEME="base16-bright"
 fi
 if [ -z "$BACKGROUND" ]; then
     export BACKGROUND="dark"
 fi
+
+MYSQL=/usr/local/mysql/bin
+export PATH=$PATH:$MYSQL
+export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
+
+export PATH="$PATH:`yarn global bin`"
 
 BASE16_SHELL="$DOTFILES/.config/base16-shell/$THEME.$BACKGROUND.sh"
 # [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 source $BASE16_SHELL
 export RBENV_ROOT=/usr/local/var/rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+export ANDROID_HOME=/Users/$(whoami)/Library/Android/sdk
+export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+
