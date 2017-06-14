@@ -38,20 +38,21 @@ Plugin 'Shougo/deoplete.nvim'
 Plugin 'Shougo/neosnippet.vim'
 Plugin 'Shougo/neosnippet-snippets'
 Plugin 'gregsexton/MatchTag'
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'isRuslan/vim-es6'
 Plugin 'leafgarland/typescript-vim'
-" Plugin 'flowtype/vim-flow'
-" Plugin 'ryanoasis/vim-devicons'
+Plugin 'flowtype/vim-flow'
+Plugin 'steelsojka/deoplete-flow'
+Plugin 'ryanoasis/vim-devicons'
 Plugin 'tomtom/quickfixsigns_vim'
 Plugin 'terryma/vim-smooth-scroll'
 
 " colorschemes
-" Plugin 'mhartington/oceanic-next'
+Plugin 'mhartington/oceanic-next'
 " Plugin 'joshdick/onedark.vim'
 " Plugin 'w0ng/vim-hybrid'
 " Plugin 'colepeters/spacemacs-theme.vim'
-Plugin 'rakr/vim-one'
+" Plugin 'rakr/vim-one'
 
 " Markdown settings
 
@@ -74,10 +75,12 @@ syntax on
 " CUSTOM STUFF
 
 " DEV ICONS
+" DEOPLETE
+let g:deoplete#sources#flow#flow_bin = 'flow' 
 
 " FLOW stuff
-" let g:neomake_javascript_enabled_makers = ['flow']
-" let g:neomake_jsx_enabled_makers = ['flow']
+let g:neomake_javascript_enabled_makers = ['flow']
+let g:neomake_jsx_enabled_makers = ['flow']
 
 " Exit Terminal with ESC
 :tnoremap <Esc> <C-\><C-n>
@@ -94,8 +97,7 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 " deoplete tab-complete
 " inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-let g:user_emmet_expandabbr_key='<Tab>'
-imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " ,<Tab> for regular tab
 inoremap <Leader><Tab> <Space><Space>
@@ -125,7 +127,7 @@ let mapleader=","
 
  " Theme
  syntax enable
- colorscheme one
+ colorscheme OceanicNext
  let g:onedark_termcolors=256
  set background=dark
 
@@ -134,7 +136,7 @@ set encoding=utf8
 set number
 set rnu
 " set guifont=Knack\ Nerd\ Font:h11
-set guifont=Fira\ Mono\ Font:h11
+" set guifont=Fira\ Mono\ Font:h11
 
 " INDENTION WIDTH SPACES AND STUFF
 set expandtab
@@ -154,23 +156,27 @@ let g:multi_cursor_next_key="\<C-s>"
 
 " AIRLINE STUFF
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#tab_nr_type = 1
+set hidden
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#show_tab_nr = 1
 let g:airline_powerline_fonts = 1
-if isdirectory(expand("~/.vim/bundle/vim-airline-themes/"))
-    if !exists('g:airline_theme')
-        let g:airline_theme = 'one'
-    endif
-    if !exists('g:airline_powerline_fonts')
-        " Use the default set of separators with a few customizations
-        let g:airline_left_sep='›'  " Slightly fancier than '>'
-        let g:airline_right_sep='‹' " Slightly fancier than '<'
-    endif
-endif
-
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = '<'
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = '>'
+let g:airline_theme='oceanicnext'
+" let g:airline_theme='base16_solarized'
+cnoreabbrev <expr> x getcmdtype() == ":" && getcmdline() == 'x' ? 'Sayonara' : 'x'
+nmap <leader>t :term<cr>
+nmap <leader>, :bnext<CR>
+nmap <leader>. :bprevious<CR>
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+nmap <leader>1 <Plug>AirlineSelectTab1
+nmap <leader>2 <Plug>AirlineSelectTab2
+nmap <leader>3 <Plug>AirlineSelectTab3
+nmap <leader>4 <Plug>AirlineSelectTab4
+nmap <leader>5 <Plug>AirlineSelectTab5
+nmap <leader>6 <Plug>AirlineSelectTab6
+nmap <leader>7 <Plug>AirlineSelectTab7
+nmap <leader>8 <Plug>AirlineSelectTab8
+nmap <leader>9 <Plug>AirlineSelectTab9
+set guifont=Knack\ Nerd\ Font:h16
 
 " don't hide quotes in json files
 let g:vim_json_syntax_conceal = 0

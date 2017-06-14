@@ -1,0 +1,23 @@
+{
+  "camelcase": false,
+  "immed": true,
+  "indent": 2,
+  "latedef": true,
+  "newcap": true,
+  "quotmark": "single",
+  "asi": true,
+  "module": true,
+
+  "esnext": true,
+  "globalstrict": true,
+
+  "browser": true,
+  "node": true,
+
+  "globals": {
+    "require": false,
+    "__dirname": false,
+    "__DEV__": false,
+    "__SERVER__": false
+  }
+}
