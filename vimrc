@@ -15,25 +15,25 @@ Plugin 'tpope/vim-fugitive'
 " Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 " Plugin 'junegunn/fzf.vim'
 Plugin 'scrooloose/nerdtree'
+" Plugin 'neomake/neomake'
 Plugin 'mattn/emmet-vim'
 Plugin 'michaeljsmith/vim-indent-object'
 Plugin 'tpope/vim-surround'
-Plugin 'benekastah/neomake'
 Plugin 'msanders/snipmate.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'jakar/vim-json'
 " Plugin 'othree/yajs.vim'
-Plugin 'mxw/vim-jsx'
 Plugin 'pangloss/vim-javascript'
-" Plugin 'vim-scripts/YankRing.vim'
+Plugin 'mxw/vim-jsx'
+Plugin 'vim-scripts/YankRing.vim'
 Plugin 'tpope/vim-commentary'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'vim-scripts/bufexplorer.zip'
-Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'sickill/vim-pasta'
 " Plugin 'jiangmiao/auto-pairs'
 Plugin 'Shougo/deoplete.nvim'
+Plugin 'wokalski/autocomplete-flow'
 " Plugin 'Valloric/YouCompleteMe'
 Plugin 'Shougo/neosnippet.vim'
 Plugin 'Shougo/neosnippet-snippets'
@@ -41,16 +41,17 @@ Plugin 'gregsexton/MatchTag'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'isRuslan/vim-es6'
 Plugin 'leafgarland/typescript-vim'
-Plugin 'flowtype/vim-flow'
-Plugin 'steelsojka/deoplete-flow'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'tomtom/quickfixsigns_vim'
 Plugin 'terryma/vim-smooth-scroll'
+Plugin 'flowtype/vim-flow'
+Plugin 'w0rp/ale'
 
 " colorschemes
-Plugin 'mhartington/oceanic-next'
-" Plugin 'joshdick/onedark.vim'
-" Plugin 'w0ng/vim-hybrid'
+" Plugin 'mhartington/oceanic-next'
+Plugin 'joshdick/onedark.vim'
+Plugin 'chriskempson/base16-vim'
+Plugin 'w0ng/vim-hybrid'
 " Plugin 'colepeters/spacemacs-theme.vim'
 " Plugin 'rakr/vim-one'
 
@@ -76,11 +77,11 @@ syntax on
 
 " DEV ICONS
 " DEOPLETE
-let g:deoplete#sources#flow#flow_bin = 'flow' 
+" let g:deoplete#sources#flow#flow_bin = 'flow' 
 
 " FLOW stuff
-let g:neomake_javascript_enabled_makers = ['flow']
-let g:neomake_jsx_enabled_makers = ['flow']
+" let g:neomake_javascript_enabled_makers = ['flow']
+" let g:neomake_jsx_enabled_makers = ['flow']
 
 " Exit Terminal with ESC
 :tnoremap <Esc> <C-\><C-n>
@@ -127,7 +128,7 @@ let mapleader=","
 
  " Theme
  syntax enable
- colorscheme OceanicNext
+ colorscheme onedark
  let g:onedark_termcolors=256
  set background=dark
 
@@ -157,10 +158,15 @@ let g:multi_cursor_next_key="\<C-s>"
 " AIRLINE STUFF
 let g:airline#extensions#tabline#enabled = 1
 set hidden
-let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline#extensions#tabline#show_tab_nr = 1
+" let g:airline#extensions#tabline#fnamemod = ':t'
+" let g:airline#extensions#tabline#show_tab_nr = 0
+" let g:airline#extensions#tabline#tab_nr_type = 1
+" let g:airline#extensions#tabline#show_splits = 1
+let g:airline#extensions#tabline#show_splits = 1 "enable/disable displaying open splits per tab (only when tabs are opened). >
+let g:airline#extensions#tabline#show_buffers = 1 " enable/disable displaying buffers with a single tab
+let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
 let g:airline_powerline_fonts = 1
-let g:airline_theme='oceanicnext'
+let g:airline_theme='base16'
 " let g:airline_theme='base16_solarized'
 cnoreabbrev <expr> x getcmdtype() == ":" && getcmdline() == 'x' ? 'Sayonara' : 'x'
 nmap <leader>t :term<cr>
@@ -176,7 +182,7 @@ nmap <leader>6 <Plug>AirlineSelectTab6
 nmap <leader>7 <Plug>AirlineSelectTab7
 nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
-set guifont=Knack\ Nerd\ Font:h16
+set guifont=Knack\ Nerd\ Font:h13
 
 " don't hide quotes in json files
 let g:vim_json_syntax_conceal = 0
@@ -287,12 +293,10 @@ vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
 
 " NEOMAKE
-let g:neomake_open_list=1
-let g:neomake_javascript_enabled_makers = ['eslint']
-let g:neomake_logfile = '/usr/local/var/log/neomake.log'
-autocmd! BufWritePost * Neomake
-
-let g:jsx_ext_required = 0 " Allow JSX in normal JS files
+" let g:neomake_open_list=1
+" let g:neomake_javascript_enabled_makers = ['eslint']
+" let g:neomake_logfile = '/usr/local/var/log/neomake.log'
+" autocmd! BufWritePost * Neomake
 
 " CUSTOM FUNCTIONS HELPER
 " function! HasPaste()
@@ -311,3 +315,44 @@ func! CurrentFileDir(cmd)
     return a:cmd . " " . expand("%:p:h") . "/"
 endfunc
 
+"Use locally installed flow
+" let local_flow = finddir('node_modules', '.;') . '/.bin/flow'
+" if matchstr(local_flow, "^\/\\w") == ''
+"     let local_flow= getcwd() . "/" . local_flow
+" endif
+" if executable(local_flow)
+"   let g:flow#flowpath = local_flow
+" endif
+
+" let g:flow#autoclose = 1
+
+" ALE CONFIG
+" Asynchronous Lint Engine (ALE)
+" Limit linters used for JavaScript.
+let g:ale_linters = {
+\  'javascript': ['flow']
+\ }
+highlight clear ALEErrorSign " otherwise uses error bg color (typically red)
+highlight clear ALEWarningSign " otherwise uses error bg color (typically red)
+let g:ale_statusline_format = ['X %d', '? %d', '']
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
+" %linter% is the name of the linter that provided the message
+" %s is the error or warning message
+let g:ale_echo_msg_format = '%linter% >> %s !!'
+" " Map keys to navigate between lines with errors and warnings.
+" nnoremap <leader>an :ALENextWrap<cr>
+nnoremap <leader>fd :FlowJumpToDef<cr>
+nnoremap <leader>ft :FlowType<cr>
+" " Set this if you want to.
+" " This can be useful if you are combining ALE with
+" " some other plugin which sets quickfix errors, etc.
+let g:ale_sign_error = '☠️'
+let g:ale_sign_warning = '🤔'
+let g:ale_sign_column_always = 1
+let g:flow#enable = 0
+
+packloadall
+" Load all of the helptags now, after plugins have been loaded.
+" All messages and errors will be ignored.
+silent! helptags ALL
