@@ -183,6 +183,7 @@ nmap <leader>7 <Plug>AirlineSelectTab7
 nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
 set guifont=Knack\ Nerd\ Font:h13
+" set guifont=Fira\ Mono:h13
 
 " don't hide quotes in json files
 let g:vim_json_syntax_conceal = 0

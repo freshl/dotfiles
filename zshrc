@@ -1,3 +1,7 @@
+autoload -U promptinit; promptinit
+prompt pure
+source /Users/svengiebel/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
 export DOTFILES=$HOME/dotfiles
 export ZSH=$DOTFILES/zsh
 
@@ -52,7 +56,7 @@ if [[ -d ~/bin ]]; then
     export PATH=~/bin:$PATH
 fi
 
-[ -z "$TMUX" ] && export TERM=xterm-256color
+# [ -z "$TMUX" ] && export TERM=xterm-256color
 
 # install rbenv
 if hash rbenv 2>/dev/null; then
@@ -64,7 +68,7 @@ if [[ -d ~/.rvm ]]; then
     source ~/.rvm/scripts/rvm
 fi
 
-# alias git to hub
+# # alias git to hub
 if hash hub 2>/dev/null; then
     eval "$(hub alias -s)"
 fi
@@ -82,12 +86,12 @@ fi
 
 
 # Base16 Shell
-if [ -z "$THEME" ]; then
-    export THEME="base16-bright"
-fi
-if [ -z "$BACKGROUND" ]; then
-    export BACKGROUND="dark"
-fi
+# if [ -z "$THEME" ]; then
+#     export THEME="base16-bright"
+# fi
+# if [ -z "$BACKGROUND" ]; then
+#     export BACKGROUND="dark"
+# fi
 
 MYSQL=/usr/local/mysql/bin
 export PATH=$PATH:$MYSQL
@@ -95,12 +99,11 @@ export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
 
 export PATH="$PATH:`yarn global bin`"
 
-BASE16_SHELL="$DOTFILES/.config/base16-shell/$THEME.$BACKGROUND.sh"
+# BASE16_SHELL="$DOTFILES/.config/base16-shell/$THEME.$BACKGROUND.sh"
 # [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
-source $BASE16_SHELL
+# source $BASE16_SHELL
 export RBENV_ROOT=/usr/local/var/rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 export ANDROID_HOME=/Users/$(whoami)/Library/Android/sdk
 export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
-
