@@ -16,6 +16,8 @@ Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 
+Plug 'Yggdroot/indentLine'
+
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 
@@ -132,6 +134,12 @@ let g:lightline = {
   \ },
   \ }
 
+" COC Default Installs
+let g:coc_global_extensions = [ 
+  \   'coc-prettier', 'coc-eslint', 'coc-tsserver', 
+  \   'coc-json', 'coc-css' 
+  \ ]
+
 " ***********************
 " *** USER BINDINGS *****
 " ***********************
@@ -161,6 +169,12 @@ vnoremap <C-k> :m '<-2<CR>gv=gv
 " remove visual search with esc
 nnoremap <esc> :noh<return><esc>
 nnoremap <esc>^[ <esc>^[
+
+" COC VIM
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
 " ***********************
 " *** PLUGIN BINDINGS ***
