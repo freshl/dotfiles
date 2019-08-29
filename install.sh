@@ -5,6 +5,19 @@ echo "******************************"
 echo "Installing some dotfiles :)"
 echo
 
+## check for OhMyZSH
+echo "->> Checking for ZSH"
+echo
+which -s zsh
+if [[ $? != 0 ]] ; then
+		echo "---> Installing ZSH"
+    echo
+    sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+else
+  echo "---> Awesome! ZSH is already installed :)"
+  echo
+fi
+
 ## check home brew installation, install if missing
 echo "->> Checking for Homebrew"
 echo
@@ -39,11 +52,11 @@ echo
 
 which -s git
 if [[ $? != 0 ]] ; then
-		echo "--> Installing git"
+		echo "---> Installing git"
     echo
     brew install git
 else
-    echo "--> Git found!"
+    echo "---> Git found!"
     echo
 fi
 
@@ -91,7 +104,19 @@ echo "->> Setting up Symlinks"
 echo 
 
 # Symlink stuff
-echo "---> vimrc"
+echo "---> Linking: vimrc"
+echo
 ln -s $DOTFILES/vimrc ~/.vimrc
+echo "---> Linking: zshrc"
+echo
+ln -s $DOTFILES/zshrc ~/.zshrc
 
-echo "Installation done! Have fun coding :)"
+echo "******************************"
+echo "->> Installing ZSH Addons"
+echo 
+
+echo "---> Installing ZSH Autosuggest"
+echo
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+echo "Installation done, dont forget to restart your terminal! Have fun coding :)"
