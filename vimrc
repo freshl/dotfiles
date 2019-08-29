@@ -61,6 +61,8 @@ if (has("termguicolors"))
 endif
 syntax enable
 colorscheme OceanicNext
+
+" search
 set incsearch
 set hlsearch
 
@@ -114,6 +116,22 @@ let g:mucomplete#enable_auto_at_startup = 1
 " vim jsx-pretty
 let g:vim_jsx_pretty_colorful_config = 1 " default 0
 
+" lightline config
+let g:lightline = {
+  \ 'active': {
+  \   'left': [ [ 'mode', 'paste' ],
+  \             [ 'readonly', 'filename', 'modified' ] ],
+  \   'right': [ [ 'lineinfo'],
+  \             [ 'percent' ], 
+  \             [ 'fileformat', 'filetype' ],
+  \             [ 'gitbranch' ]
+  \             ]
+  \ },
+  \ 'component_function': {
+  \   'gitbranch': 'fugitive#head'
+  \ },
+  \ }
+
 " ***********************
 " *** USER BINDINGS *****
 " ***********************
@@ -139,6 +157,10 @@ nnoremap <C-k> :m .-2<CR>==
 " Visual mode
 vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
+
+" remove visual search with esc
+nnoremap <esc> :noh<return><esc>
+nnoremap <esc>^[ <esc>^[
 
 " ***********************
 " *** PLUGIN BINDINGS ***
