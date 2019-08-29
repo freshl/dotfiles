@@ -8,6 +8,7 @@ else # OS X `ls`
     colorflag="-G"
 fi
 
+# Allow ctrl+s
 alias vim="nvim"
 
 # Filesystem aliases
@@ -64,3 +65,7 @@ alias htdocs="cd /Applications/MAMP/htdocs"
 alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
 
 alias chrome="/Applications/Google\\ \\Chrome.app/Contents/MacOS/Google\\ \\Chrome"
+
+
+# REAT NATIVE
+alias rn_debug="cd android/ && ./gradlew clean && cd .. && react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res && cd android/ && ./gradlew assembleDebug"

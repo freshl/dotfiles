@@ -1,9 +1,9 @@
 autoload -U promptinit; promptinit
-prompt pure
 source /Users/svengiebel/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 export DOTFILES=$HOME/dotfiles
 export ZSH=$DOTFILES/zsh
+ZSH_THEME="agnoster"
 
 export PATH="/usr/local/bin:$PATH"
 # export ANDROID_HOME=~/Library/Android/sdk
@@ -105,5 +105,18 @@ export PATH="$PATH:`yarn global bin`"
 export RBENV_ROOT=/usr/local/var/rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
 export ANDROID_HOME=/Users/$(whoami)/Library/Android/sdk
 export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+
+SPACESHIP_PROMPT_ADD_NEWLINE="true"
+SPACESHIP_CHAR_SYMBOL=" \uf0e7"
+SPACESHIP_CHAR_PREFIX="\ue712"
+SPACESHIP_CHAR_SUFFIX=(" ")
+SPACESHIP_CHAR_COLOR_SUCCESS="yellow"
+SPACESHIP_PROMPT_DEFAULT_PREFIX="$USER"
+SPACESHIP_PROMPT_FIRST_PREFIX_SHOW="true"
+SPACESHIP_USER_SHOW="true"
+
+# PROMPT='%(?.%F{magenta}.%F{red})❯%f '
