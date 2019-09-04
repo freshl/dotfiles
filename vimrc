@@ -12,9 +12,12 @@ Plug 'mhartington/oceanic-next'
 
 " BUGGED Plug 'sheerun/vim-polyglot'
 
-Plug 'tpope/vim-vinegar'
+Plug 'wincent/ferret'
+
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
+
+Plug 'scrooloose/nerdtree'
 
 Plug 'Yggdroot/indentLine'
 
@@ -28,23 +31,23 @@ Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'branch': 'release/1.x',
-  \ 'for': [
-    \ 'javascript',
-    \ 'typescript',
-    \ 'css',
-    \ 'less',
-    \ 'scss',
-    \ 'json',
-    \ 'graphql',
-    \ 'markdown',
-    \ 'php',
-    \ 'python',
-    \ 'ruby',
-    \ 'html',
-    \ 'swift' ] }
+" Plug 'prettier/vim-prettier', {
+"   \ 'do': 'yarn install',
+"   \ 'branch': 'release/1.x',
+"   \ 'for': [
+"     \ 'javascript',
+"     \ 'typescript',
+"     \ 'css',
+"     \ 'less',
+"     \ 'scss',
+"     \ 'json',
+"     \ 'graphql',
+"     \ 'markdown',
+"     \ 'php',
+"     \ 'python',
+"     \ 'ruby',
+"     \ 'html',
+"     \ 'swift' ] }
 
 " Plug 'lifepillar/vim-mucomplete'
 
@@ -68,12 +71,16 @@ colorscheme OceanicNext
 set incsearch
 set hlsearch
 
+" remove warning for unsaved buffers on buffer switch
+set hidden
+
 set nocompatible              " be iMproved, required
 filetype off                  " required
 filetype plugin on
 
 let mapleader = ","
 set rtp+=/usr/local/opt/fzf
+
 
 " ***********************
 " ******* EDITOR ********
@@ -106,9 +113,9 @@ set completeopt=menu,menuone,preview,noselect,noinsert
 set laststatus=2
 
 " prettier
-let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.json,*.css,*.scss,*.less,*.graphql PrettierAsync
-autocmd BufNewFile,BufRead *.ts setlocal filetype=typescript
+" let g:prettier#autoformat = 0
+" autocmd BufWritePre *.js,*.json,*.css,*.scss,*.less,*.graphql PrettierAsync
+" autocmd BufNewFile,BufRead *.ts setlocal filetype=typescript
 
 " MUComplete
 set completeopt+=menuone
@@ -134,11 +141,16 @@ let g:lightline = {
   \ },
   \ }
 
-" COC Default Installs
+" coc.vim
+" default installs
 let g:coc_global_extensions = [ 
   \   'coc-prettier', 'coc-eslint', 'coc-tsserver', 
   \   'coc-json', 'coc-css' 
   \ ]
+" coc.vim prettier act
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+" vinegar
 
 " ***********************
 " *** USER BINDINGS *****
@@ -191,6 +203,9 @@ nmap <leader>gs :Gstatus<cr>
 nmap <leader>gc :Gcommit<cr>
 nmap <leader>gd :Gdiff<cr>
 nmap <leader>gp :Gpush<cr>
+
+" NERDTree
+map <leader>nt :NERDTreeToggle<CR>
 
 " ***********************
 " ******* RUNTIME *******
