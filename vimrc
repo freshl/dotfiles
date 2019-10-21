@@ -9,6 +9,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'tpope/vim-surround'
 Plug 'joshdick/onedark.vim'
 Plug 'mhartington/oceanic-next'
+Plug 'haishanh/night-owl.vim'
 
 " BUGGED Plug 'sheerun/vim-polyglot'
 
@@ -22,7 +23,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'Yggdroot/indentLine'
 
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
 
 Plug 'jlanzarotta/bufexplorer'
 
@@ -65,7 +66,7 @@ if (has("termguicolors"))
  set termguicolors
 endif
 syntax enable
-colorscheme OceanicNext
+colorscheme night-owl
 
 " search
 set incsearch
@@ -151,6 +152,9 @@ let g:coc_global_extensions = [
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 " vinegar
+
+" indentLine
+let g:indentLine_char = '.'
 
 " ***********************
 " *** USER BINDINGS *****
