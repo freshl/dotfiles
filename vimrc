@@ -6,12 +6,20 @@ call plug#begin('~/.local/share/nvim/plugged')
 " ****** PLUGINS ********
 " ***********************
 " THEME STUFF
-Plug 'tpope/vim-surround'
+
 Plug 'joshdick/onedark.vim'
 Plug 'mhartington/oceanic-next'
+Plug 'haishanh/night-owl.vim'
+Plug 'ayu-theme/ayu-vim'
+Plug 'TroyFletcher/vim-colors-synthwave'
+Plug 'jdsimcoe/abstract.vim'
+Plug 'jacoborus/tender.vim'
+Plug 'rakr/vim-two-firewatch'
+Plug 'raphamorim/lucario'
 
 " BUGGED Plug 'sheerun/vim-polyglot'
 
+Plug 'tpope/vim-surround'
 Plug 'wincent/ferret'
 
 Plug 'tpope/vim-commentary'
@@ -65,7 +73,8 @@ if (has("termguicolors"))
  set termguicolors
 endif
 syntax enable
-colorscheme OceanicNext
+" let ayucolor="dark"
+colorscheme night-owl
 
 " search
 set incsearch
@@ -87,16 +96,19 @@ set rtp+=/usr/local/opt/fzf
 " ***********************
 
 " turn hybrid line numbers on
-:set number relativenumber
-:set nu rnu
+set number relativenumber
+set nu rnu
 
 " toggle hybrid line numbers
-:set number! relativenumber!
-:set nu! rnu!
+set number! relativenumber!
+set nu! rnu!
 
 set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
+
+" ignore swapmessage warnings
+set shortmess+=A
 
 set completeopt=menu,menuone,preview,noselect,noinsert
 
@@ -150,6 +162,9 @@ let g:coc_global_extensions = [
 " coc.vim prettier act
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
+" Nerdtreee
+let NERDTreeShowHidden=1
+
 " vinegar
 
 " ***********************
@@ -187,6 +202,10 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+nmap <leader>cf <Plug>(coc-fix-current)
+
+" find and replace
+xnoremap <leader>fr :%s/<c-r>=expand("<cword>")<cr>//c<left><left>
 
 " ***********************
 " *** PLUGIN BINDINGS ***
