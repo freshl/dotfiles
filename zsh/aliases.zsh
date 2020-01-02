@@ -10,6 +10,29 @@ fi
 
 alias vim="nvim"
 
+# Set Git language to English
+alias git='LANG=en_GB git'
+
+# Git helper
+# init completion
+# Git branch bash completion
+if [ -f ~/.git-completion.bash ]; then
+  . ~/.git-completion.bash
+  
+  # Add git completion to aliases
+  __git_complete gc _git_checkout
+  __git_complete gf __git_fetch
+  __git_complete gp _git_pull
+  __git_complete gpo _git_pull_origin
+  __git_complete gcom _git_commit
+fi
+
+alias gc='git checkout'
+alias gf='git fetch'
+alias gpo='git pull origin'
+alias gcom='git commit'
+alias gp='git pull'
+
 # Filesystem aliases
 alias ..='cd ..'
 alias ...='cd ../..'

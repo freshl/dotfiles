@@ -1,6 +1,7 @@
-source /Users/svengiebel/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 autoload -Uz promptinit
 promptinit
+
+plugins=()
 
 export DOTFILES=$HOME/dotfiles
 export ZSH=$DOTFILES/zsh
@@ -109,6 +110,8 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 export ANDROID_HOME=/Users/$(whoami)/Library/Android/sdk
 export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+
+source ./zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 prompt pure
 PROMPT='%(?.%F{red}.%F{yellow})❯%F{green}❯%F{blue}❯%f '

@@ -10,12 +10,6 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'joshdick/onedark.vim'
 Plug 'mhartington/oceanic-next'
 Plug 'haishanh/night-owl.vim'
-Plug 'ayu-theme/ayu-vim'
-Plug 'TroyFletcher/vim-colors-synthwave'
-Plug 'jdsimcoe/abstract.vim'
-Plug 'jacoborus/tender.vim'
-Plug 'rakr/vim-two-firewatch'
-Plug 'raphamorim/lucario'
 
 " BUGGED Plug 'sheerun/vim-polyglot'
 
@@ -30,7 +24,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'Yggdroot/indentLine'
 
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
 
 Plug 'jlanzarotta/bufexplorer'
 
@@ -73,7 +67,6 @@ if (has("termguicolors"))
  set termguicolors
 endif
 syntax enable
-" let ayucolor="dark"
 colorscheme night-owl
 
 " search
@@ -143,7 +136,7 @@ let g:lightline = {
   \   'left': [ [ 'mode', 'paste' ],
   \             [ 'readonly', 'filename', 'modified' ] ],
   \   'right': [ [ 'lineinfo'],
-  \             [ 'percent' ], 
+  \             [ 'percent' ],
   \             [ 'fileformat', 'filetype' ],
   \             [ 'gitbranch' ]
   \             ]
@@ -155,9 +148,9 @@ let g:lightline = {
 
 " coc.vim
 " default installs
-let g:coc_global_extensions = [ 
-  \   'coc-prettier', 'coc-eslint', 'coc-tsserver', 
-  \   'coc-json', 'coc-css' 
+let g:coc_global_extensions = [
+  \   'coc-prettier', 'coc-eslint', 'coc-tsserver',
+  \   'coc-json', 'coc-css'
   \ ]
 " coc.vim prettier act
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
@@ -166,6 +159,9 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 let NERDTreeShowHidden=1
 
 " vinegar
+
+" indentLine
+let g:indentLine_char = '.'
 
 " ***********************
 " *** USER BINDINGS *****
