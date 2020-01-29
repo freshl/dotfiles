@@ -152,6 +152,8 @@ let g:coc_global_extensions = [
   \   'coc-prettier', 'coc-eslint', 'coc-tsserver',
   \   'coc-json', 'coc-css'
   \ ]
+nmap <silent> <leader>rf <Plug>(coc-refactor)
+
 " coc.vim prettier act
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
@@ -201,7 +203,7 @@ nmap <silent> gr <Plug>(coc-references)
 nmap <leader>cf <Plug>(coc-fix-current)
 
 " find and replace
-xnoremap <leader>fr :%s/<c-r>=expand("<cword>")<cr>//c<left><left>
+nmap <leader>fr :%s/<c-r>=expand("<cword>")<cr>//c<left><left>
 
 " ***********************
 " *** PLUGIN BINDINGS ***
