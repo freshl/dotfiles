@@ -7,6 +7,7 @@ export DOTFILES=$HOME/dotfiles
 export ZSH=$DOTFILES/zsh
 
 export PATH="/usr/local/bin:$PATH"
+export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
 # export ANDROID_HOME=~/Library/Android/sdk
 # export PATH=${PATH}:${ANDROID_HOME}/tools
 
@@ -62,11 +63,6 @@ fi
 # install rbenv
 if hash rbenv 2>/dev/null; then
     eval "$(rbenv init -)"
-fi
-
-if [[ -d ~/.rvm ]]; then
-    PATH=$HOME/.rvm/bin:$PATH # Add RVM to PATH for scripting
-    source ~/.rvm/scripts/rvm
 fi
 
 # # alias git to hub
