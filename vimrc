@@ -10,6 +10,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'joshdick/onedark.vim'
 Plug 'mhartington/oceanic-next'
 Plug 'haishanh/night-owl.vim'
+Plug 'drewtempelmeyer/palenight.vim'
 
 " BUGGED Plug 'sheerun/vim-polyglot'
 
@@ -23,8 +24,8 @@ Plug 'scrooloose/nerdtree'
 
 Plug 'Yggdroot/indentLine'
 
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
 
 Plug 'jlanzarotta/bufexplorer'
 
@@ -63,11 +64,14 @@ call plug#end()
 " ***********************
 " **** BASE SETTINGS ****
 " ***********************
+if (has("nvim"))
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+endif
 if (has("termguicolors"))
  set termguicolors
 endif
 syntax enable
-colorscheme night-owl
+colorscheme palenight
 
 " search
 set incsearch
@@ -132,6 +136,7 @@ let g:vim_jsx_pretty_colorful_config = 1 " default 0
 
 " lightline config
 let g:lightline = {
+  \ 'colorscheme': 'palenight',
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
   \             [ 'readonly', 'filename', 'modified' ] ],
