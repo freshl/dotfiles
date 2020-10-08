@@ -10,7 +10,6 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'joshdick/onedark.vim'
 Plug 'mhartington/oceanic-next'
 Plug 'haishanh/night-owl.vim'
-Plug 'ciaranm/inkpot'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'dracula/vim', { 'as': 'dracula' }
 
@@ -28,6 +27,9 @@ Plug 'Yggdroot/indentLine'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+Plug 'tpope/vim-rails'
+Plug 'evanleck/vim-svelte'
+Plug 'reasonml-editor/vim-reason-plus'
 
 Plug 'jlanzarotta/bufexplorer'
 
@@ -88,6 +90,14 @@ filetype plugin on
 
 let mapleader = ","
 set rtp+=/usr/local/opt/fzf
+
+" Cursor Settings
+" highlight Cursor guifg=white guibg=steelblue
+" highlight iCursor guifg=white guibg=steelblue
+" set guicursor=n-v-c:v25-Cursor
+" set guicursor+=n-v-c:blinkon0
+" set guicursor+=i:ver100-iCursor
+" set guicursor+=i:blinkwait10
 
 
 " ***********************
