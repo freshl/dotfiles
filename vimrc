@@ -10,7 +10,9 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'joshdick/onedark.vim'
 Plug 'mhartington/oceanic-next'
 Plug 'haishanh/night-owl.vim'
+Plug 'ciaranm/inkpot'
 Plug 'drewtempelmeyer/palenight.vim'
+Plug 'dracula/vim', { 'as': 'dracula' }
 
 " BUGGED Plug 'sheerun/vim-polyglot'
 
@@ -170,6 +172,9 @@ let NERDTreeShowHidden=1
 " indentLine
 let g:indentLine_char = '.'
 
+" poppy (rainbow brackets like)
+" au! cursormoved * call PoppyInit()
+
 " ***********************
 " *** USER BINDINGS *****
 " ***********************
@@ -205,6 +210,7 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+nmap <leader>cfs <Plug>(coc-codeaction-selected)w
 nmap <leader>cf <Plug>(coc-fix-current)
 
 " find and replace
